@@ -10,7 +10,7 @@ public class InputReader {
 
     public static final String DEAD = ".";
     public static final String LIVE = "*";
-    public static final String CELL_SEPARATOR = " ";
+    public static final String CELL_SEPARATOR = "";
 
     private final Boolean[][] grid;
 

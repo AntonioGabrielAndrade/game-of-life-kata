@@ -22,10 +22,10 @@ public class InputReaderTest {
     @BeforeClass
     public static void createInputFile() throws Exception {
         createFileWithLines(INPUT_FILE,
-                                      ". . . . . . . .",
-                                            ". . . . * . . .",
-                                            ". . . * * . . .",
-                                            ". . . . . . . .");
+                                      "........",
+                                            "....*...",
+                                            "...**...",
+                                            "........");
     }
 
     @AfterClass
