@@ -8,8 +8,6 @@ import static br.com.antoniogabriel.kata.Grid.CellState.LIVE;
 
 public class Grid {
 
-
-
     enum CellState {
         LIVE("*"), DEAD(".");
 
@@ -44,20 +42,28 @@ public class Grid {
         this.cols = grid[0].length;
     }
 
-    public CellState[][] asCellStateGrid() {
-        return grid;
-    }
-
     public int totalRows() {
-        return grid.length;
+        return rows;
     }
 
     public int totalCols() {
-        return grid[0].length;
+        return cols;
     }
 
     public CellState getCell(int row, int col) {
         return grid[row][col];
+    }
+
+    public Grid nextGeneration() {
+        CellState[][] nextState = new CellState[rows][cols];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                nextState[i][j] = nextStateForCell(i, j);
+            }
+        }
+
+        return new Grid(nextState);
     }
 
     public CellState nextStateForCell(int row, int col) {
@@ -74,18 +80,6 @@ public class Grid {
                 return DEAD;
             }
         }
-    }
-
-    public Grid nextGeneration() {
-        CellState[][] nextState = new CellState[rows][cols];
-
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                nextState[i][j] = nextStateForCell(i, j);
-            }
-        }
-
-        return new Grid(nextState);
     }
 
     private int liveNeighbours(int row, int col) {

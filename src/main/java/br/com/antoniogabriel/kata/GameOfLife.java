@@ -41,15 +41,15 @@ public class GameOfLife {
     }
 
     private void printGrid(Grid grid) {
-        for (int i = 0; i < grid.totalRows(); i++) {
-            console.printLine(buildLineFrom(i, grid));
+        for (int row = 0; row < grid.totalRows(); row++) {
+            console.printLine(buildLineFrom(row, grid));
         }
     }
 
     private String buildLineFrom(int row, Grid grid) {
         String line = "";
-        for (int i = 0; i < grid.totalCols(); i++) {
-            line += grid.getCell(row, i).toString();
+        for (int col = 0; col < grid.totalCols(); col++) {
+            line += grid.getCell(row, col).toString();
         }
         return line;
     }
