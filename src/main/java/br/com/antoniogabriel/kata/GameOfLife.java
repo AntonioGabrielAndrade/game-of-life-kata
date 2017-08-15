@@ -18,31 +18,27 @@ public class GameOfLife {
         }
     }
 
-    private void printGeneration(int generation, Boolean[][] grid) {
+    private void printGeneration(int generation, Grid grid) {
         printHeader(generation, grid);
         printGrid(grid);
     }
 
-    private void printHeader(int generation, Boolean[][] grid) {
+    private void printHeader(int generation, Grid grid) {
         console.printLine("Generation " + generation + ":");
-        console.printLine(grid.length + " " + grid[0].length);
+        console.printLine(grid.totalRows() + " " + grid.totalCols());
     }
 
-    private void printGrid(Boolean[][] grid) {
-        for (Boolean[] row : grid) {
-            console.printLine(buildLineFrom(row));
+    private void printGrid(Grid grid) {
+        for (int i = 0; i < grid.totalRows(); i++) {
+            console.printLine(buildLineFrom(i, grid));
         }
     }
 
-    private String buildLineFrom(Boolean[] row) {
+    private String buildLineFrom(int row, Grid grid) {
         String line = "";
-        for (int i = 0; i < row.length; i++) {
-            line += asString(row[i]);
+        for (int i = 0; i < grid.totalCols(); i++) {
+            line += grid.getCell(row, i).toString();
         }
         return line;
-    }
-
-    private String asString(Boolean cell) {
-        return cell ? "*" : ".";
     }
 }

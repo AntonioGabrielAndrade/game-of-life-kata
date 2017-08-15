@@ -40,18 +40,40 @@ public class GameOfLifeTest {
     @Before
     public void setUp() throws Exception {
         game = new GameOfLife(console);
+        game.start(INPUT_FILE);
     }
 
     @Test
     public void shouldPrintInputGrid() throws Exception {
-        game.start(INPUT_FILE);
+        checkGenerationOne();
+    }
 
+//    @Test
+//    public void shouldPrintNextGeneration() throws Exception {
+//        checkGenerationOne();
+//
+//        game.nextGeneration();
+//        checkGenerationTwo();
+//    }
+
+    private void checkGenerationOne() {
         InOrder inOrder = inOrder(console);
 
         inOrder.verify(console).printLine("Generation 1:");
         inOrder.verify(console).printLine("4 8");
         inOrder.verify(console).printLine("........");
         inOrder.verify(console).printLine("....*...");
+        inOrder.verify(console).printLine("...**...");
+        inOrder.verify(console).printLine("........");
+    }
+
+    private void checkGenerationTwo() {
+        InOrder inOrder = inOrder(console);
+
+        inOrder.verify(console).printLine("Generation 2:");
+        inOrder.verify(console).printLine("4 8");
+        inOrder.verify(console).printLine("........");
+        inOrder.verify(console).printLine("...**...");
         inOrder.verify(console).printLine("...**...");
         inOrder.verify(console).printLine("........");
     }

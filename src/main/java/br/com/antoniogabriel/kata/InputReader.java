@@ -1,5 +1,7 @@
 package br.com.antoniogabriel.kata;
 
+import br.com.antoniogabriel.kata.Grid.CellState;
+
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -8,39 +10,30 @@ import static java.nio.file.Files.readAllLines;
 
 public class InputReader {
 
-    public static final String DEAD = ".";
-    public static final String LIVE = "*";
     public static final String CELL_SEPARATOR = "";
 
-    private final Boolean[][] grid;
+    private final CellState[][] grid;
 
     public InputReader(String inputFile) throws IOException {
         grid = readAllLines(Paths.get(inputFile))
                 .stream()
                 .map(line -> line.split(CELL_SEPARATOR))
-                .map(this::toBooleanArray)
-                .toArray(Boolean[][]::new);
+                .map(this::toCellStateArray)
+                .toArray(CellState[][]::new);
     }
 
-    private Boolean[] toBooleanArray(String[] lineArray) {
+    private CellState[] toCellStateArray(String[] lineArray) {
         return Arrays.stream(lineArray)
-                        .map(this::toBoolean)
-                        .toArray(Boolean[]::new);
+                        .map(this::toCellState)
+                        .toArray(CellState[]::new);
 
     }
 
-    private boolean toBoolean(String cell) {
-        switch (cell) {
-            case DEAD:
-                return false;
-            case LIVE:
-                return true;
-            default:
-                throw new IllegalArgumentException("Unknown grid cell: " + cell);
-        }
+    private CellState toCellState(String cell) {
+        return CellState.fromString(cell);
     }
 
-    public Boolean[][] getGrid() {
-        return grid;
+    public Grid getGrid() {
+        return new Grid(grid);
     }
 }

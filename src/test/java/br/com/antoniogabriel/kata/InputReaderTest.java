@@ -1,5 +1,6 @@
 package br.com.antoniogabriel.kata;
 
+import br.com.antoniogabriel.kata.Grid.CellState;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -7,6 +8,8 @@ import org.junit.Test;
 
 import java.nio.file.Paths;
 
+import static br.com.antoniogabriel.kata.Grid.CellState.DEAD;
+import static br.com.antoniogabriel.kata.Grid.CellState.LIVE;
 import static java.nio.file.Files.deleteIfExists;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -37,13 +40,13 @@ public class InputReaderTest {
     }
 
     @Test
-    public void shouldReadInputAsBooleanMatrix() throws Exception {
-        Boolean[][] matrix = {
-                {false, false, false, false, false, false, false, false},
-                {false, false, false, false, true,  false, false, false},
-                {false, false, false, true,  true,  false, false, false},
-                {false, false, false, false, false, false, false, false}
+    public void shouldReadInputAsCellStateMatrix() throws Exception {
+        CellState[][] matrix = {
+                {DEAD, DEAD, DEAD, DEAD, DEAD, DEAD, DEAD, DEAD},
+                {DEAD, DEAD, DEAD, DEAD, LIVE, DEAD, DEAD, DEAD},
+                {DEAD, DEAD, DEAD, LIVE, LIVE, DEAD, DEAD, DEAD},
+                {DEAD, DEAD, DEAD, DEAD, DEAD, DEAD, DEAD, DEAD}
         };
-        assertThat(reader.getGrid(), equalTo(matrix));
+        assertThat(reader.getGrid(), equalTo(new Grid(matrix)));
     }
 }
