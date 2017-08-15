@@ -6,7 +6,7 @@ public class GameOfLife {
 
     private Console console;
     private Grid grid;
-    private int generation;
+    private int generation = 0;
 
     public GameOfLife(Console console) {
         this.console = console;
@@ -14,17 +14,19 @@ public class GameOfLife {
 
     public void start(String inputFile) {
         try {
-            grid = new InputReader(inputFile).getGrid();
-            generation = 1;
-            printGeneration(generation, grid);
+            next(new InputReader(inputFile).getGrid());
         } catch (IOException e) {
             console.printLine("Could not read file: " + inputFile);
         }
     }
 
     public void nextGeneration() {
+        next(grid.nextGeneration());
+    }
+
+    private void next(Grid nextGrid) {
         generation++;
-        grid = grid.nextGeneration();
+        grid = nextGrid;
         printGeneration(generation, grid);
     }
 
