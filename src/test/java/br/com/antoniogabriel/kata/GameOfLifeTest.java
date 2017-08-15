@@ -13,6 +13,7 @@ import java.nio.file.Paths;
 
 import static java.nio.file.Files.deleteIfExists;
 import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.times;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GameOfLifeTest {
@@ -48,13 +49,13 @@ public class GameOfLifeTest {
         checkGenerationOne();
     }
 
-//    @Test
-//    public void shouldPrintNextGeneration() throws Exception {
-//        checkGenerationOne();
-//
-//        game.nextGeneration();
-//        checkGenerationTwo();
-//    }
+    @Test
+    public void shouldPrintNextGeneration() throws Exception {
+        checkGenerationOne();
+
+        game.nextGeneration();
+        checkGenerationTwo();
+    }
 
     private void checkGenerationOne() {
         InOrder inOrder = inOrder(console);
@@ -73,8 +74,7 @@ public class GameOfLifeTest {
         inOrder.verify(console).printLine("Generation 2:");
         inOrder.verify(console).printLine("4 8");
         inOrder.verify(console).printLine("........");
-        inOrder.verify(console).printLine("...**...");
-        inOrder.verify(console).printLine("...**...");
+        inOrder.verify(console, times(2)).printLine("...**...");
         inOrder.verify(console).printLine("........");
     }
 }

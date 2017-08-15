@@ -5,6 +5,8 @@ import java.io.IOException;
 public class GameOfLife {
 
     private Console console;
+    private Grid grid;
+    private int generation;
 
     public GameOfLife(Console console) {
         this.console = console;
@@ -12,10 +14,18 @@ public class GameOfLife {
 
     public void start(String inputFile) {
         try {
-            printGeneration(1, new InputReader(inputFile).getGrid());
+            grid = new InputReader(inputFile).getGrid();
+            generation = 1;
+            printGeneration(generation, grid);
         } catch (IOException e) {
             console.printLine("Could not read file: " + inputFile);
         }
+    }
+
+    public void nextGeneration() {
+        generation++;
+        grid = grid.nextGeneration();
+        printGeneration(generation, grid);
     }
 
     private void printGeneration(int generation, Grid grid) {
@@ -41,4 +51,5 @@ public class GameOfLife {
         }
         return line;
     }
+
 }

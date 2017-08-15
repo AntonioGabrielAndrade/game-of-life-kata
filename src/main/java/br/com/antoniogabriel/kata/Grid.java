@@ -76,6 +76,18 @@ public class Grid {
         }
     }
 
+    public Grid nextGeneration() {
+        CellState[][] nextState = new CellState[rows][cols];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                nextState[i][j] = nextStateForCell(i, j);
+            }
+        }
+
+        return new Grid(nextState);
+    }
+
     private int liveNeighbours(int row, int col) {
         int count = 0;
 
